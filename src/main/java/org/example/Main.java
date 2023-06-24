@@ -1,9 +1,12 @@
 package org.example;
 
+import org.example.Models.Tools;
 import org.example.View.HomeView;
 
 public class Main {
     public static void main(String[] args) {
-        new HomeView();
+        HomeView.getInstance().run();
+//        Tools.getInstance().receivedSong("");
     }
+
 }

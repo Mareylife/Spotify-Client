@@ -2,11 +2,15 @@ package org.example.View;
 
 import org.example.Controller.Actions.ExitButtonAction;
 import org.example.Controller.Actions.PlayButtonAction;
+import org.example.Controller.Actions.RefreshButtonAction;
+import org.example.Controller.Connection;
+import org.example.Models.Tools;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class HomeView extends JFrame {
     private JLabel label;
@@ -18,7 +22,27 @@ public class HomeView extends JFrame {
     private JButton exit_btn;
     private JComboBox comboBox;
 
+    private static HomeView homeView;
+    public static HomeView getInstance() {
+        if (homeView == null) {
+            homeView = new HomeView();
+        }
+        return homeView;
+    }
+
+    public void run() {
+        setVisible(true);
+    }
+
+    public void RefreshSongs(ArrayList<String> songs) {
+        comboBox.removeAllItems();
+        for (String song : songs) {
+            comboBox.addItem(song);
+        }
+    }
+
     public HomeView() {
+        Connection.getConnection();
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLayout(new GridLayout(8, 0));
         setSize(400, 300);
@@ -29,7 +53,6 @@ public class HomeView extends JFrame {
         setResizable(false);
         setUndecorated(true);
         getContentPane().setBackground(new Color(30, 215, 96));
-        setVisible(true);
     }
 
     private void initialize() {
@@ -55,6 +78,7 @@ public class HomeView extends JFrame {
 //        comboBox
         comboBox = new JComboBox();
         comboBox.setBackground(new Color(30, 215, 96));
+        comboBox.addItem("none");
 
 //        slider
         slider = new JSlider(JSlider.HORIZONTAL, 0, 100, 0);
@@ -73,7 +97,12 @@ public class HomeView extends JFrame {
 
     private void setActions() {
         play_btn.addActionListener(PlayButtonAction.getAction());
+        refresh_btn.addActionListener(RefreshButtonAction.getAction());
         exit_btn.addActionListener(ExitButtonAction.getAction());
+    }
+
+    public String getSelectedSong() {
+        return (String) comboBox.getSelectedItem();
     }
 }
 

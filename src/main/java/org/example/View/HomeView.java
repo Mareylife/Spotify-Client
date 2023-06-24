@@ -6,6 +6,7 @@ import org.example.Controller.Actions.RefreshButtonAction;
 import org.example.Controller.Connection;
 import org.example.Models.Tools;
 
+import java.io.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -82,6 +83,9 @@ public class HomeView extends JFrame {
 
 //        slider
         slider = new JSlider(JSlider.HORIZONTAL, 0, 100, 0);
+        slider.setEnabled(false);
+        slider.setMaximum(0);
+        slider.setMaximum(163);
         slider.setBackground(new Color(30, 215, 96));
 
 //        added items
@@ -103,6 +107,42 @@ public class HomeView extends JFrame {
 
     public String getSelectedSong() {
         return (String) comboBox.getSelectedItem();
+    }
+
+    public JLabel getVals() {
+        return vals;
+    }
+
+    public JLabel getLabel() {
+        return label;
+    }
+
+    public JLabel getSpotify() {
+        return Spotify;
+    }
+
+    public JSlider getSlider() {
+        return slider;
+    }
+
+    public JButton getRefresh_btn() {
+        return refresh_btn;
+    }
+
+    public JButton getPlay_btn() {
+        return play_btn;
+    }
+
+    public JButton getExit_btn() {
+        return exit_btn;
+    }
+
+    public JComboBox getComboBox() {
+        return comboBox;
+    }
+
+    public static HomeView getHomeView() {
+        return homeView;
     }
 }
 

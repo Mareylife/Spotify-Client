@@ -32,4 +32,8 @@ public class Connection {
     public Socket getSocket() {
         return socket;
     }
+
+    public void reConnect() throws IOException {
+        socket = new Socket("localhost", PORT);
+    }
 }
